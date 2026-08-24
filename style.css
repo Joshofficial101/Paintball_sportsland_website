@@ -1,0 +1,23 @@
+/* CSS Styles */
+
+/* aling main name in the center of the page */
+h1 {
+    text-align: center;
+}
+
+/* align the navigation bar in the center of the page */
+
+.nav-menu {
+  display: flex;            /* Lines items up in a row */
+  justify-content: center;  /* Centers the whole menu on the page */
+  gap: 20px;                /* Puts clean spacing between each link */
+  list-style: none;         /* Removes default bullets */
+  padding: 0;               /* Removes default browser padding */
+  margin: 0;                /* Removes default browser margin */
+}
+
+/* Don't forget to style the actual links too! */
+.nav-menu a {
+  text-decoration: none;
+  color: #333;
+}
