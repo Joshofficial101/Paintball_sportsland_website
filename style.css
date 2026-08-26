@@ -1,9 +1,25 @@
 /* CSS Styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 
 /* aling main name in the center of the page */
 h1 {
     text-align: center;
+    margin-top: 0;
 }
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+}
+
 
 /* align the navigation bar in the center of the page */
 
@@ -20,4 +36,121 @@ h1 {
 .nav-menu a {
   text-decoration: none;
   color: #333;
+}
+
+/* adding slide show top of the page */
+.slide { 
+  position:absolute;
+  inset:0; 
+  opacity:0; 
+  transition: opacity 0.5s ease;
+}
+.slide.active {
+  opacity: 1;
+}
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+.slide img { 
+  width:100%; 
+  height:100%; 
+  object-fit:cover;
+}
+.caption { 
+  position:absolute;
+  bottom:20%;
+  left:5%;
+  color:white;
+  font-family:Arial;
+  max-width:600px;
+  z-index: 1;
+  transform: translateY(30px);
+  opacity:0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.caption p {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+.slide.active .caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+.book-button {
+  display: inline-block;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.35rem;
+  background: #f97316;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.book-button:hover,
+.book-button:focus-visible {
+  background: #ea580c;
+  transform: translateY(-2px);
+}
+.book-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+.slide-arrow {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1.8rem;
+  padding: 0 0.75rem;
+  cursor: pointer;
+}
+.slide-controls {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateX(-50%);
+}
+.slide-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+.slide-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  padding: 0;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.slide-dot.active {
+  background: white;
+}
+.page-scroll {
+  position: fixed;
+  top: 15vh;
+  right: 1rem;
+  width: 0.25rem;
+  height: 70vh;
+  z-index: 4;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+}
+.page-scroll-thumb {
+  width: 100%;
+  height: 20%;
+  border-radius: inherit;
+  background: white;
+  transition: transform 0.2s ease;
 }

@@ -1,6 +1,5 @@
 <html>
   <head>
-    
     <title>Paintball Sports Land</title>
     <!-- LINKS YOUR HTML TO YOUR STYLE.CSS FILE -->
   <link rel="stylesheet" href="style.css">
@@ -9,7 +8,7 @@
     <header>
       <h1>Paintball Sports Land</h1>
       <nav>
-        <ul>
+        <ul class="nav-menu">
             <li><a href="Home.html">Home</a></li>
             <li><a href="Paintball.html">Paintball</a></li>
             <li><a href="Airsoft.html">Airsoft</a></li>
@@ -20,4 +19,58 @@
         </ul>
       </nav>
     </header>
+
+    <!-- Slideshow images -->
+    <section class="slideshow">
+  <div class="slide active">
+    <img src="images\airfoster.jpg" alt="Paintball field">
+    <div class="caption">
+      <p>Take on the field</p>
+      <a class="book-button" href="Reservation.html">Book Your Game</a>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="images\overivew_town_minifield.jpg" alt="Paintball players">
+    <div class="caption">
+      <p>Play with your team</p>
+      <a class="book-button" href="Reservation.html">Book Your Game</a>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="images\overview_of_speedball.jpg" alt="Paintball equipment">
+    <div class="caption">
+      <p>Gear up and play</p>
+      <a class="book-button" href="Reservation.html">Book Your Game</a>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="images\paintballer_running.jpg" alt="Paintball field overview">
+    <div class="caption">
+      <p>Explore our fields</p>
+      <a class="book-button" href="Reservation.html">Book Your Game</a>
+    </div>
+  </div>
+
+
+  <div class="slide-controls" aria-label="Slideshow controls">
+    <button class="slide-arrow previous" type="button" aria-label="Previous slide">&lt;</button>
+    <div class="slide-dots">
+      <button class="slide-dot active" type="button" aria-label="Show slide 1"></button>
+      <button class="slide-dot" type="button" aria-label="Show slide 2"></button>
+      <button class="slide-dot" type="button" aria-label="Show slide 3"></button>
+      <button class="slide-dot" type="button" aria-label="Show slide 4"></button>
+    </div>
+    <button class="slide-arrow next" type="button" aria-label="Next slide">&gt;</button>
+  </div>
+</section>
+
+<div class="page-scroll" aria-label="Page scroll progress">
+  <div class="page-scroll-thumb"></div>
+</div>
+
+<!-- JavaScript for slideshow functionality -->
+<script src="script.js"></script>
     
