@@ -1,7 +1,7 @@
 /*
   SLIDESHOW ELEMENTS
   These variables connect JavaScript to HTML elements by their CSS classes.
-  If a class name changes in main.html, update it here too.
+  If a class name changes in index.html, update it here too.
 */
 const slides = document.querySelectorAll('.slide');
 const previousButton = document.querySelector('.previous');
