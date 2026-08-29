@@ -7,6 +7,13 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  overflow-x: hidden;
+}
+/* Includes borders and padding in element widths to prevent small-screen overflow. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 /* BUSINESS NAME IN THE HEADER */
@@ -1400,4 +1407,61 @@ a[href^="tel:"] {
   border-radius: inherit;
   background: white;
   transition: transform 0.2s ease;
+}
+
+/*
+  MOBILE AND TABLET LAYOUT
+  The header returns to normal document flow below 700px so it never covers page
+  headings or hero content. Navigation wraps rather than running off the screen.
+*/
+@media (max-width: 700px) {
+  header {
+    position: relative;
+    padding: 0.75rem 1rem;
+  }
+
+  h1 {
+    margin-bottom: 0.65rem;
+    font-size: clamp(1.35rem, 7vw, 2rem);
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+  }
+
+  .nav-menu a {
+    font-size: 0.85rem;
+  }
+
+  .slideshow {
+    height: clamp(30rem, 72svh, 38rem);
+  }
+
+  .caption {
+    right: 1rem;
+    bottom: 4.5rem;
+    left: 1rem;
+    max-width: none;
+    padding: 1rem;
+  }
+
+  .caption p {
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
+  }
+
+  .inner-page-hero {
+    min-height: 14rem;
+    padding: 3rem 1.25rem;
+  }
+
+  .rules-waiver-content,
+  .prices-content,
+  .reservation-content {
+    padding-top: 3.5rem;
+  }
+
+  .page-scroll {
+    display: none;
+  }
 }
