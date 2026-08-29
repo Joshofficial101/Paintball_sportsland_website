@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Page title displayed in the browser tab. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules &amp; Waiver | Paintball Sports Land</title>
+    <!-- Shares the site's existing styles with this page. -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Shared site header. Keep these links the same across all pages. -->
+    <header>
+      <h1>Paintball Sports Land</h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu">
+          <li><a href="main.html">Home</a></li>
+          <li><a href="Paintball.html">Paintball</a></li>
+          <li><a href="Airsoft.html">Airsoft</a></li>
+          <li><a href="prices.html">Prices</a></li>
+          <li><a href="Rules.html" aria-current="page">Rules &amp; Waiver</a></li>
+          <li><a href="Reservation.html">Reservation</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Official rules and waiver instructions share one pre-game destination. -->
+      <section class="page-content rules-waiver-content" aria-labelledby="rules-heading">
+        <div class="content-heading">
+          <h2 id="rules-heading">Before You Play</h2>
+          <p>Review the official field rules and complete the required waiver before arriving.</p>
+        </div>
+        <!-- A short notice makes the waiver requirement clear before the download action. -->
+        <div class="rental-id-notice waiver-required-notice">
+          <h4>Required Waiver</h4>
+          <p>Every Paintball participant must sign a Release of Liability form before playing. Download, print, and complete the waiver before game day.</p>
+        </div>
+        <section class="waiver-download-section">
+          <h3>Download Your Waiver</h3>
+          <p>Print clearly and bring your completed form with you. A signed waiver is required before participating in any games at Paintball Sports Land.</p>
+          <!-- The download attribute saves the exact waiver PDF included with this website. -->
+          <a class="book-button" href="documents/WAIVERPBSL2011.pdf" download="WAIVERPBSL2011.pdf">Download Waiver (PDF)</a>
+        </section>
+        <section class="field-rules-section" aria-labelledby="field-rules-heading">
+          <h3 id="field-rules-heading">Field Rules</h3>
+          <ol>
+            <li>Wear your mask at all times.</li>
+            <li>Keep your barrel cover on at all times unless you are actively playing.</li>
+            <li>Follow the surrender rule: do not shoot another player within 20 feet.</li>
+            <li>Do not blind fire. Look where you are shooting.</li>
+            <li>Do not move bunkers or climb trees.</li>
+            <li>One hit eliminates you for that round, including hits to your gun or mask. When eliminated, raise your hand and walk back to the safe zone.</li>
+            <li>Eliminated players may not talk.</li>
+            <li>Physical contact between players is not allowed.</li>
+            <li>Safe zones are staging areas. You may remove your mask inside them, but all guns must have barrel covers on.</li>
+            <li>Rental players may not use paintballs that are on the ground.</li>
+          </ol>
+          <!-- This button builds the PDF from the current list above, so both always match. -->
+          <button class="book-button rules-download-button" id="download-rules-button" type="button">Download Rules (PDF)</button>
+        </section>
+        <section class="waiver-age-section">
+          <h3>Age &amp; Parent/Guardian Requirements</h3>
+          <p>Players ages 10–17 must have the waiver signed by a parent or guardian before playing. Children under age 10 may not play games at Paintball Sports Land, but may use the target range area for free practice. A parent or legal guardian must be present for a minor’s waiver.</p>
+        </section>
+        <div class="page-action-row">
+          <a class="book-button" href="Reservation.html">Book Your Game</a>
+          <span>Call with questions: <a class="text-link" href="tel:+13018981100">(301) 898-1100</a></span>
+        </div>
+      </section>
+    </main>
+    <!-- Creates an up-to-date rules PDF from the list on this page when requested. -->
+    <script src="rules-download.js"></script>
+  </body>
+</html>

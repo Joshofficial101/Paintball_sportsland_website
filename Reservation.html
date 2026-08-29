@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Page title displayed in the browser tab. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation | Paintball Sports Land</title>
+    <!-- Shares the site's existing styles with this page. -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Shared site header. Keep these links the same across all pages. -->
+    <header>
+      <h1>Paintball Sports Land</h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu">
+          <li><a href="main.html">Home</a></li>
+          <li><a href="Paintball.html">Paintball</a></li>
+          <li><a href="Airsoft.html">Airsoft</a></li>
+          <li><a href="prices.html">Prices</a></li>
+          <li><a href="Rules.html">Rules &amp; Waiver</a></li>
+          <li><a href="Reservation.html" aria-current="page">Reservation</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- The form collects a reservation request; owner approval is still required. -->
+      <section class="page-content reservation-content" aria-labelledby="reservation-heading">
+        <div class="content-heading">
+          <h2 id="reservation-heading">Request a Reservation</h2>
+          <p>Choose your preferred date and details. A reservation is not confirmed until Paintball Sports Land approves it.</p>
+        </div>
+        <form class="reservation-form" id="reservation-request-form">
+          <section class="calendar-panel" aria-labelledby="date-heading">
+            <div class="calendar-heading-row">
+              <h3 id="date-heading">Select Your Date</h3>
+              <div class="calendar-navigation">
+                <button id="calendar-previous" type="button" aria-label="Previous month">‹</button>
+                <h4 id="calendar-month" aria-live="polite"></h4>
+                <button id="calendar-next" type="button" aria-label="Next month">›</button>
+              </div>
+            </div>
+            <div class="calendar-weekdays" aria-hidden="true">
+              <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
+            <!-- JavaScript fills this grid with the current month's selectable dates. -->
+            <div class="calendar-days" id="calendar-days" role="grid" aria-label="Reservation dates"></div>
+            <input id="reservation-date" name="date" type="hidden" required>
+            <p class="calendar-selection" id="calendar-selection" aria-live="polite">Choose an available date to continue.</p>
+          </section>
+
+          <section class="reservation-details" aria-labelledby="details-heading">
+            <h3 id="details-heading">Reservation Details</h3>
+            <label for="reservation-package">Reservation type</label>
+            <select id="reservation-package" name="package" required>
+              <option value="">Select a reservation type</option>
+              <option>Paintball Party Package</option>
+              <option>Airsoft Rental Request</option>
+            </select>
+
+            <fieldset class="session-options" id="session-options" disabled>
+              <legend>Weekend Session</legend>
+              <p id="session-help">Select a weekend date to choose a session.</p>
+              <label><input name="session" type="radio" value="Morning session: 10:00 AM–1:00 PM"> Morning session: 10:00 AM–1:00 PM</label>
+              <label><input name="session" type="radio" value="Afternoon session: 1:00 PM–4:00 PM"> Afternoon session: 1:00 PM–4:00 PM</label>
+            </fieldset>
+
+            <label for="player-count">Expected players</label>
+            <input id="player-count" name="players" type="number" min="1" max="100" inputmode="numeric" required>
+          </section>
+
+          <section class="contact-details-form" aria-labelledby="contact-heading">
+            <h3 id="contact-heading">Contact Information</h3>
+            <div class="contact-name-grid">
+              <div><label for="first-name">First name</label><input id="first-name" name="firstName" autocomplete="given-name" required></div>
+              <div><label for="last-name">Last name</label><input id="last-name" name="lastName" autocomplete="family-name" required></div>
+            </div>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+          </section>
+
+          <div class="reservation-form-action">
+            <button class="book-button" type="submit">Send Reservation Request</button>
+            <p id="reservation-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+        <p class="reservation-call-note">Online reservation requests will be sent to the owner for approval once the reservation service is connected. For immediate help, call <a href="tel:+13018981100">(301) 898-1100</a>.</p>
+      </section>
+    </main>
+    <!-- Creates the live calendar and validates the static reservation-request demo. -->
+    <script src="reservation-calendar.js"></script>
+  </body>
+</html>

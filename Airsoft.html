@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Page title displayed in the browser tab. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airsoft | Paintball Sports Land</title>
+    <!-- Shares the site's existing styles with this page. -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Shared site header. Keep these links the same across all pages. -->
+    <header>
+      <h1>Paintball Sports Land</h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu">
+          <li><a href="main.html">Home</a></li>
+          <li><a href="Paintball.html">Paintball</a></li>
+          <li><a href="Airsoft.html" aria-current="page">Airsoft</a></li>
+          <li><a href="prices.html">Prices</a></li>
+          <li><a href="Rules.html">Rules &amp; Waiver</a></li>
+          <li><a href="Reservation.html">Reservation</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Page hero introduces the activity without relying on a new image. -->
+      <section class="inner-page-hero airsoft-hero">
+        <p class="section-label">Choose your adventure</p>
+        <h2>Airsoft</h2>
+        <p>Build your next airsoft game day at Paintball Sports Land.</p>
+      </section>
+
+      <section class="page-content airsoft-visit-section" aria-labelledby="airsoft-plan-heading">
+        <div class="content-heading">
+          <h2 id="airsoft-plan-heading">Plan Your Airsoft Visit</h2>
+          <p>Airsoft walk-on play is available on weekends. Please call ahead if you need rental equipment.</p>
+        </div>
+        <div class="content-grid">
+          <article class="page-card">
+            <h3>Weekend Walk-On Play</h3>
+            <p>Walk-on airsoft play is available Saturday and Sunday from 10:00 AM to 4:00 PM.</p>
+          </article>
+          <article class="page-card airsoft-rental-card">
+            <h3>Rental Equipment</h3>
+            <p>Airsoft rentals are limited and are not available every weekend. Call in advance to reserve yours.</p>
+          </article>
+        </div>
+        <aside class="page-callout airsoft-rental-notice">
+          <h3>Rental reservation required</h3>
+          <p>We cannot guarantee an airsoft rental if you do not call ahead to reserve it.</p>
+        </aside>
+        <div class="page-action-row">
+          <a class="book-button" href="Reservation.html">Plan Your Visit</a>
+          <span>Call to reserve a rental: <a class="text-link" href="tel:+13018981100">(301) 898-1100</a></span>
+        </div>
+      </section>
+
+      <section class="airsoft-rules-section" aria-labelledby="airsoft-rules-heading">
+        <div class="content-heading">
+          <p class="section-label">Field safety</p>
+          <h2 id="airsoft-rules-heading">Velocity &amp; Face Protection Rules</h2>
+          <p>All players must meet these field limits and safety-equipment requirements before playing.</p>
+        </div>
+        <div class="content-grid airsoft-rules-grid">
+          <article class="page-card airsoft-rule-card">
+            <h3>Velocity Limits</h3>
+            <dl class="airsoft-limits">
+              <div>
+                <dt>Regular AEGs</dt>
+                <dd>400 FPS with .20 BBs</dd>
+              </div>
+              <div>
+                <dt>Snipers</dt>
+                <dd>500 FPS with .20 BBs</dd>
+              </div>
+              <div>
+                <dt>Sniper engagement range</dt>
+                <dd>Minimum 100 feet</dd>
+              </div>
+              <div>
+                <dt>Rate of fire</dt>
+                <dd>Maximum 25 RPS</dd>
+              </div>
+            </dl>
+          </article>
+          <article class="page-card airsoft-rule-card">
+            <h3>Face Mask Rules</h3>
+            <ul>
+              <li>Players under 18 must wear a full-face mask.</li>
+              <li>Players 18 and older may wear a two-piece face mask.</li>
+              <li>Eye protection must be full seal; regular safety glasses are not allowed.</li>
+              <li>A lower face mask must be worn with eye protection.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

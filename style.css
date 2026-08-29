@@ -1,4 +1,7 @@
-/* CSS Styles */
+/*
+  SITE-WIDE RESET
+  Removes default browser spacing so the hero can reach the screen edges.
+*/
 html,
 body {
   margin: 0;
@@ -6,81 +9,136 @@ body {
   width: 100%;
 }
 
-/* aling main name in the center of the page */
+/* BUSINESS NAME IN THE HEADER */
 h1 {
-    text-align: center;
-    margin-top: 0;
+  /* Centers the name and removes the browser's default top spacing. */
+  text-align: center;
+  margin-top: 0;
+  /* White text and a shadow keep the title readable over every photograph. */
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
 }
 
+/* HEADER OVERLAY
+   Positioned over the hero rather than taking up space above it. */
 header {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  /* z-index keeps header above slides, dark image overlay, and captions. */
   z-index: 3;
+  padding: 1rem 0;
+  /*
+    A consistent dark glass panel keeps the logo and links readable as images change.
+    The slight transparency still lets the hero photo show through the top bar.
+  */
+  background: rgba(17, 24, 39, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
 }
 
 
-/* align the navigation bar in the center of the page */
+/* NAVIGATION LIST
+   Flexbox places page links in a horizontal, centered row. */
 
 .nav-menu {
-  display: flex;            /* Lines items up in a row */
-  justify-content: center;  /* Centers the whole menu on the page */
-  gap: 20px;                /* Puts clean spacing between each link */
-  list-style: none;         /* Removes default bullets */
-  padding: 0;               /* Removes default browser padding */
-  margin: 0;                /* Removes default browser margin */
+  display: flex;            /* Lines navigation items up in a row. */
+  justify-content: center;  /* Centers the complete menu. */
+  gap: 20px;                /* Space between each link; increase for a looser menu. */
+  list-style: none;         /* Removes default bullet points. */
+  padding: 0;               /* Removes browser-provided list indentation. */
+  margin: 0;                /* Removes browser-provided list spacing. */
 }
 
-/* Don't forget to style the actual links too! */
+/* Individual navigation links. */
 .nav-menu a {
   text-decoration: none;
-  color: #333;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+/* Orange feedback shows which navigation link a mouse or keyboard user has selected. */
+.nav-menu a:hover,
+.nav-menu a:focus-visible {
+  color: #fb923c;
+}
+/* Clear outline lets keyboard users see the active navigation link. */
+.nav-menu a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
 }
 
-/* adding slide show top of the page */
+/* HERO SLIDESHOW
+   Every slide fills the same hero area. Only .active is visible. */
 .slide { 
-  position:absolute;
-  inset:0; 
-  opacity:0; 
-  transition: opacity 0.5s ease;
+  position:absolute; /* Removes each slide from normal layout so slides overlap. */
+  inset:0;           /* Equivalent to top/right/bottom/left: 0; fills the slideshow. */
+  opacity:0;         /* Hidden slides are transparent. */
+  transition: opacity 0.5s ease; /* Fade duration when JavaScript changes slides. */
 }
 .slide.active {
+  /* JavaScript adds this class to show the selected slide. */
   opacity: 1;
 }
+/* Contrast overlay placed above the image but behind caption text. */
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.38) 52%, rgba(0, 0, 0, 0.12) 100%);
+  pointer-events: none; /* Allows clicks to pass through to the button and controls. */
+}
+/* Container that sets the slideshow size. Change height to change hero height. */
 .slideshow {
   position: relative;
   width: 100%;
   height: 500px;
-  overflow: hidden;
+  overflow: hidden; /* Prevents images and fade effects from extending outside the hero. */
 }
+/* Each image fills the container; object-fit crops it rather than stretching it. */
 .slide img { 
   width:100%; 
   height:100%; 
   object-fit:cover;
 }
+/* Keeps the Airsoft player's head and marker below the header without changing hero height. */
+.airsoft-slide img {
+  object-position: center 18%;
+}
+/* HERO CAPTION AND READABILITY PANEL */
 .caption { 
   position:absolute;
-  bottom:20%;
-  left:5%;
+  bottom:20%; /* Moves the caption up from the bottom of the image. */
+  left:5%;    /* Keeps a responsive margin from the left edge. */
   color:white;
   font-family:Arial;
   max-width:600px;
-  z-index: 1;
-  transform: translateY(30px);
-  opacity:0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1; /* Places text above the image contrast overlay. */
+  padding: 1.25rem;
+  border-left: 4px solid #f97316; /* Orange accent used throughout the site. */
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: rgba(0, 0, 0, 0.42);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(30px); /* Start slightly lower for the entrance animation. */
+  opacity:0;                   /* Captions are hidden until their slide becomes active. */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Caption fade and upward motion. */
 }
+/* The large caption wording. clamp() makes it scale between phone and desktop sizes. */
 .caption p {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;
   line-height: 1.05;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 .slide.active .caption {
+  /* Shows and raises the caption only on the active slide. */
   opacity: 1;
   transform: translateY(0);
 }
+/* PRIMARY CALL-TO-ACTION: the reservation link styled as a button. */
 .book-button {
   display: inline-block;
   padding: 0.85rem 1.25rem;
@@ -92,7 +150,9 @@ header {
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease;
 }
+/* Hover is for mouse users; focus-visible gives keyboard users the same feedback. */
 .book-button:hover,
+/* High-contrast outline shown when tabbing to the booking button. */
 .book-button:focus-visible {
   background: #ea580c;
   transform: translateY(-2px);
@@ -101,6 +161,7 @@ header {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
+/* SLIDESHOW CONTROLS */
 .slide-arrow {
   position: relative;
   border: none;
@@ -110,6 +171,7 @@ header {
   padding: 0 0.75rem;
   cursor: pointer;
 }
+/* Holds the arrows and dots at the bottom center of the hero. */
 .slide-controls {
   position: absolute;
   bottom: 1.25rem;
@@ -120,10 +182,12 @@ header {
   gap: 0.5rem;
   transform: translateX(-50%);
 }
+/* Places the slide selector dots in a row. */
 .slide-dots {
   display: flex;
   gap: 0.5rem;
 }
+/* Default (unselected) slide selector. */
 .slide-dot {
   width: 0.7rem;
   height: 0.7rem;
@@ -133,9 +197,1191 @@ header {
   background: transparent;
   cursor: pointer;
 }
+/* JavaScript applies active to the dot for the visible slide. */
 .slide-dot.active {
   background: white;
 }
+
+/*
+  HOURS AND AVAILABILITY SECTION
+  This is the first content area after the hero. Its dark background keeps the
+  energetic paintball style while the light cards make the schedule easy to scan.
+*/
+.hours-section {
+  /*
+    Pull this section upward over the bottom of the hero image. Its transparent-to-dark
+    background then fades the photo into the solid #111827 content area below it.
+    Keep the negative margin and the first padding value in sync: both are 8rem.
+  */
+  position: relative;
+  z-index: 1;
+  margin-top: -8rem;
+  padding: 13rem 5% 5rem; /* 8rem transition space plus the original 5rem top spacing. */
+  background: linear-gradient(to bottom, rgba(17, 24, 39, 0) 0, #111827 8rem, #111827 100%);
+  color: #f8fafc;
+  text-align: center;
+}
+/* Limits line length so the introductory text stays comfortable to read. */
+.hours-intro {
+  max-width: 43rem;
+  margin: 0 auto 2.5rem;
+}
+/* Small orange label placed above the main hours heading. */
+.section-label {
+  margin: 0 0 0.5rem;
+  color: #fb923c;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* Main heading for the hours section. */
+.hours-section h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+/* Introductory paragraph beneath the heading. */
+.hours-intro > p:last-child {
+  margin: 1rem 0 0;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+/* Places the two schedule cards side-by-side on wide screens. */
+.hours-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 56rem;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+/* Base styling shared by both schedule cards. */
+.hours-card {
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  background: #1f2937;
+}
+/* Small uppercase category label at the top of each card. */
+.hours-card-label {
+  margin: 0 0 0.75rem;
+  color: #fb923c;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+/* Day-range title in each card. */
+.hours-card h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+/* The time line is emphasized so visitors find it at a glance. */
+.hours-time {
+  margin: 0.75rem 0;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+/* Supporting schedule information, such as who may book. */
+.hours-card p:last-child {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+/* Adds a little visual separation above the booking link. */
+.hours-button {
+  margin-top: 0.5rem;
+}
+
+/*
+  PHONE-SIZED LAYOUT
+  Stacks schedule cards so neither the days nor hours become cramped on phones.
+*/
+@media (max-width: 600px) {
+  .hours-section {
+    /* Preserves the image fade while reducing normal section spacing on phones. */
+    padding: 11.5rem 1.25rem 3.5rem;
+  }
+
+  .hours-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+  LOCATION AND CONTACT SECTION
+  A light section after the dark hours area gives the page visual variety and
+  keeps the address and phone number easy to read.
+*/
+.location-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  align-items: center;
+  padding: 5rem 10%;
+  background: #f8fafc;
+  color: #172033;
+}
+/* Constrains the intro copy so lines do not become overly long. */
+.location-intro {
+  max-width: 34rem;
+}
+/* Reuses the orange section label but gives it a darker background-friendly color. */
+.location-section .section-label {
+  color: #c2410c;
+}
+/* Main location heading. */
+.location-section h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+/* Descriptive text beneath the location heading. */
+.location-intro > p:last-of-type {
+  margin: 1rem 0 1.5rem;
+  color: #475569;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+/* Directions link styled as a bordered button so it is secondary to booking. */
+.directions-button {
+  display: inline-block;
+  padding: 0.8rem 1.15rem;
+  border: 2px solid #ea580c;
+  border-radius: 0.35rem;
+  color: #c2410c;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+/* Inverts the button colors when it is hovered or selected by keyboard navigation. */
+.directions-button:hover,
+.directions-button:focus-visible {
+  background: #ea580c;
+  color: #fff;
+}
+/* Visible keyboard focus outline for accessibility. */
+.directions-button:focus-visible {
+  outline: 3px solid #172033;
+  outline-offset: 3px;
+}
+/* Stacks the address and telephone cards with consistent space between them. */
+.contact-details {
+  display: grid;
+  gap: 1rem;
+}
+/* Shared card layout for an individual contact method. */
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0; /* Removes the browser's default italic address spacing. */
+  padding: 1.5rem;
+  border-left: 4px solid #f97316;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  color: #334155;
+  font-size: 1.1rem;
+  font-style: normal; /* address elements are italic by default; this keeps the card readable. */
+  line-height: 1.5;
+}
+/* Small uppercase heading such as Address or Phone. */
+.contact-label {
+  color: #c2410c;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+/* Phone number link; the color differentiates it and supports tap-to-call on mobile. */
+.contact-item a {
+  color: #172033;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.6;
+  padding: 0.1em 0 0.15em;
+  /* The underline collided with parentheses on some screens; color and weight keep this clearly tappable. */
+  text-decoration: none;
+}
+/* Keeps displayed phone numbers on one unbroken, comfortably spaced line. */
+a[href^="tel:"] {
+  display: inline-block;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* On phones, stack the location introduction and contact cards vertically. */
+@media (max-width: 700px) {
+  .location-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3.5rem 1.25rem;
+  }
+}
+
+/*
+  FAQ SECTION
+  A neutral light background separates these expandable answers from the location
+  section. The browser handles opening and closing each details element—no script needed.
+*/
+.faq-section {
+  padding: 5rem 5%;
+  background: #e2e8f0;
+  color: #172033;
+}
+/* Centers and limits the introductory copy. */
+.faq-intro {
+  max-width: 43rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+/* Uses a darker orange so the label remains readable on the light FAQ background. */
+.faq-section .section-label {
+  color: #c2410c;
+}
+/* Main FAQ heading. */
+.faq-section h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+/* Introductory paragraph below the heading. */
+.faq-intro > p:last-child {
+  margin: 1rem 0 0;
+  color: #475569;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+/* Keeps the questions at a readable width and gives them consistent spacing. */
+.faq-list {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+/* Individual expandable question card. */
+.faq-item {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+}
+/* The clickable question heading. */
+.faq-item summary {
+  padding: 1.15rem 3rem 1.15rem 1.25rem;
+  color: #172033;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+/* Changes the question color when its answer is currently expanded. */
+.faq-item[open] summary {
+  color: #c2410c;
+}
+/* Answer text revealed after a visitor opens a question. */
+.faq-item p {
+  margin: 0;
+  padding: 0 1.25rem 1.25rem;
+  color: #475569;
+  line-height: 1.6;
+}
+/* Phone number in the FAQ retains a clear, accessible link style. */
+.faq-item a {
+  color: #9a3412;
+  font-weight: 800;
+}
+/* Clear focus outline when keyboard users tab to a question. */
+.faq-item summary:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: -3px;
+}
+
+/*
+  INNER PAGE LAYOUT
+  These reusable styles give every new navigation page a consistent hero and
+  content layout. They do not affect the homepage slideshow.
+*/
+.inner-page-hero {
+  display: grid;
+  place-items: center;
+  min-height: 18rem;
+  padding: 8rem 5% 3rem; /* Top padding leaves room for the absolute header. */
+  background: linear-gradient(135deg, #111827, #263449);
+  color: #fff;
+  text-align: center;
+}
+/* Inner-page section labels use a light orange that is readable on the dark hero. */
+.inner-page-hero .section-label {
+  margin-bottom: 0.75rem;
+  color: #fb923c;
+}
+/* Main title on the non-homepage hero areas. */
+.inner-page-hero h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+/* Short description placed below each inner-page title. */
+.inner-page-hero > p:last-child {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  color: #dbeafe;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+/* Uses the supplied Airsoft field photo while preserving readable hero text. */
+.airsoft-hero {
+  background:
+    linear-gradient(rgba(14, 25, 18, 0.68), rgba(14, 25, 18, 0.68)),
+    url("images/Airsoft_2.jpg") center 55% / cover no-repeat;
+}
+/* Paintball page hero uses the supplied field photograph with a dark overlay for readable text. */
+.paintball-hero {
+  background:
+    linear-gradient(rgba(10, 20, 12, 0.7), rgba(10, 20, 12, 0.7)),
+    url("images/mfranck-paintball-1449870.jpg") center 42% / cover no-repeat;
+}
+/* Main white content area used on all of the new pages. */
+.page-content {
+  padding: 5rem 10%;
+  background: #f8fafc;
+  color: #172033;
+}
+/* Centers the title and introduction above each page's content cards. */
+.content-heading {
+  max-width: 43rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+.content-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.content-heading p {
+  margin: 1rem 0 0;
+  color: #475569;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+/* Responsive two-column grid for activity and package cards. */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+/* Shared white card used across the inner pages. */
+.page-card,
+.page-callout {
+  padding: 2rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+.page-card h3,
+.page-callout h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.35rem;
+}
+.page-card p,
+.page-callout p {
+  margin: 0.75rem 0 0;
+  color: #475569;
+  line-height: 1.6;
+}
+/* Single full-width callout used for notes about rules, waivers, or reservations. */
+.page-callout {
+  max-width: 52rem;
+  margin: 2rem auto 0;
+  border-left: 4px solid #f97316;
+}
+.waiver-download-section,
+.waiver-age-section,
+.field-rules-section {
+  max-width: 52rem;
+  margin: 2.5rem auto 0;
+}
+.waiver-download-section h3,
+.waiver-age-section h3,
+.field-rules-section h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.35rem;
+}
+.waiver-download-section p,
+.waiver-age-section p {
+  margin: 0.75rem 0 0;
+  color: #475569;
+  line-height: 1.6;
+}
+.waiver-download-section .book-button {
+  margin-top: 1.25rem;
+}
+.field-rules-section ol {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0 0;
+  padding-left: 1.4rem;
+  color: #475569;
+  line-height: 1.6;
+}
+.field-rules-section li::marker {
+  color: #c2410c;
+  font-weight: 800;
+}
+.rules-download-button {
+  margin-top: 1.25rem;
+  border: 0;
+  cursor: pointer;
+}
+/* Replaces the removed Rules & Waiver hero while keeping content below the overlay header. */
+.rules-waiver-content {
+  padding-top: 11rem;
+}
+.reservation-content {
+  padding-top: 11rem;
+}
+.reservation-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 2rem 3rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+.calendar-panel,
+.reservation-details,
+.contact-details-form {
+  min-width: 0;
+}
+.calendar-heading-row,
+.reservation-details > h3,
+.contact-details-form h3 {
+  margin: 0;
+}
+.calendar-heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.calendar-heading-row h3,
+.reservation-details h3,
+.contact-details-form h3 {
+  color: #172033;
+  font-size: 1.35rem;
+}
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.calendar-navigation h4 {
+  width: 9rem;
+  margin: 0;
+  color: #475569;
+  font-size: 1rem;
+  text-align: center;
+}
+.calendar-navigation button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  background: #fff;
+  color: #c2410c;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.calendar-navigation button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.calendar-weekdays {
+  margin-top: 1.5rem;
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.calendar-days {
+  gap: 0.3rem;
+  margin-top: 0.55rem;
+}
+.calendar-day,
+.calendar-empty-day {
+  aspect-ratio: 1;
+}
+.calendar-day {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.35rem;
+  background: #fff;
+  color: #172033;
+  font-weight: 700;
+  cursor: pointer;
+}
+.calendar-day:hover,
+.calendar-day:focus-visible {
+  border-color: #f97316;
+  color: #c2410c;
+}
+.calendar-day:focus-visible {
+  outline: 2px solid #172033;
+  outline-offset: 2px;
+}
+.calendar-day.is-selected {
+  border-color: #ea580c;
+  background: #f97316;
+  color: #fff;
+}
+.calendar-day:disabled {
+  border-color: transparent;
+  background: transparent;
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+.calendar-selection {
+  min-height: 1.5rem;
+  margin: 1rem 0 0;
+  color: #475569;
+  line-height: 1.5;
+}
+.reservation-details,
+.contact-details-form {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+}
+.reservation-details label,
+.contact-details-form label {
+  margin-top: 0.75rem;
+  color: #475569;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+.reservation-details select,
+.reservation-details input,
+.contact-details-form input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+}
+.reservation-details select:focus,
+.reservation-details input:focus,
+.contact-details-form input:focus {
+  outline: 3px solid rgba(249, 115, 22, 0.35);
+  border-color: #ea580c;
+}
+.session-options {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1rem 0 0;
+  padding: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+}
+.session-options:disabled {
+  opacity: 0.55;
+}
+.session-options legend {
+  padding: 0 0.25rem;
+  color: #475569;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+.session-options p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.session-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.session-options input {
+  width: auto;
+  margin: 0.2rem 0 0;
+}
+.contact-details-form {
+  grid-column: 1 / -1;
+  max-width: 44rem;
+}
+.contact-name-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.contact-name-grid div {
+  display: grid;
+  gap: 0.6rem;
+}
+.contact-name-grid label {
+  margin-top: 0.75rem;
+}
+.reservation-form-action {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.reservation-form-action .book-button {
+  border: 0;
+  cursor: pointer;
+}
+.reservation-form-action p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.5;
+}
+.reservation-call-note {
+  max-width: 60rem;
+  margin: 2rem auto 0;
+  color: #475569;
+  line-height: 1.6;
+}
+/* Replaces the removed Prices hero while keeping content below the overlay header. */
+.prices-content {
+  padding-top: 11rem;
+}
+/* Pricing tables use definition lists so each item and price remain paired. */
+.price-list {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1rem 0 0;
+}
+.price-list div {
+  display: grid;
+  gap: 0.18rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.price-list div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.price-list dt {
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.price-list dd {
+  margin: 0;
+  color: #172033;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+.price-list dd span {
+  display: block;
+  margin-top: 0.15rem;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+.price-feature {
+  margin: 0.85rem 0 0 !important;
+  color: #c2410c !important;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.all-day-rental {
+  margin: 1rem 0 0 !important;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  color: #172033 !important;
+}
+.all-day-rental strong,
+.all-day-rental span {
+  display: block;
+}
+.all-day-rental strong {
+  color: #c2410c;
+  font-size: 1.15rem;
+}
+.all-day-rental span {
+  margin-top: 0.25rem;
+  color: #64748b;
+}
+.pricing-primary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  /* Each column can end at its own content height instead of sharing one tall card. */
+  align-items: start;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.pricing-primary section + section {
+  border-left: 1px solid #e2e8f0;
+  padding-left: 3rem;
+}
+.admission-rental-items {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+.admission-rental-items h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.2rem;
+}
+/* Uses two columns to keep the small rental-item price list compact. */
+.admission-rental-items .compact-price-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.25rem;
+}
+.admission-rental-items .compact-price-list div {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.admission-rental-items .compact-price-list div:last-child {
+  grid-column: 1 / -1;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e2e8f0;
+}
+/* Places the single-session schedule directly beneath the individual rental price. */
+.pricing-primary section:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+}
+.pricing-primary section:nth-child(2) > h3 {
+  order: 0;
+}
+.pricing-primary section:nth-child(2) > .price-feature {
+  order: 1;
+}
+.pricing-primary section:nth-child(2) > p:last-child {
+  order: 2;
+}
+.pricing-primary section:nth-child(2) > p:nth-of-type(2) {
+  order: 3;
+}
+.pricing-primary section:nth-child(2) > .all-day-rental {
+  order: 4;
+}
+.pricing-primary section:nth-child(2) > .rental-id-notice {
+  order: 5;
+}
+.party-price-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem 2rem;
+  max-width: 52rem;
+  margin: 2rem auto 0;
+  padding: 1.5rem 2rem;
+  border-left: 4px solid #f97316;
+  background: #fff7ed;
+}
+.party-price-strip h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.35rem;
+}
+.party-price-strip p:not(.price-feature) {
+  margin: 0.4rem 0 0;
+  color: #475569;
+  line-height: 1.5;
+}
+.party-price-strip .price-feature {
+  margin: 0 !important;
+  white-space: nowrap;
+}
+.party-price-strip .price-feature span {
+  font-size: 1rem;
+}
+.party-price-details {
+  display: grid;
+  gap: 0.45rem;
+  width: 100%;
+  margin: 0.25rem 0 0;
+  padding: 1rem 0 0 1.25rem;
+  border-top: 1px solid #fed7aa;
+  color: #475569;
+  line-height: 1.5;
+}
+.rental-id-notice {
+  margin-top: 1.25rem;
+  padding: 1rem 1.15rem;
+  border-left: 4px solid #dc2626;
+  border-left-color: #dc2626;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: #fff7ed;
+}
+.rental-id-notice h4 {
+  margin: 0;
+  color: #991b1b;
+  font-size: 0.95rem;
+}
+.rental-id-notice p {
+  margin: 0.4rem 0 0;
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+/* Reuses the compact notice pattern for the required waiver at the top of its page. */
+.waiver-required-notice {
+  max-width: 52rem;
+  margin: 0 auto;
+  border-left-color: #c2410c;
+  background: #fff7ed;
+}
+.waiver-required-notice h4 {
+  color: #9a3412;
+}
+.pricing-extras {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem 4rem;
+  max-width: 52rem;
+  margin: 3rem auto 0;
+}
+.price-detail h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.2rem;
+}
+/* The original lower placement is hidden after moving this list into Admission & Air. */
+.price-detail--moved {
+  display: none;
+}
+.price-item-list {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  color: #475569;
+  line-height: 1.7;
+}
+.compact-price-list {
+  gap: 0.65rem;
+}
+.compact-price-list div {
+  padding-bottom: 0.65rem;
+}
+.pro-shop-note,
+.price-change-note {
+  max-width: 52rem;
+  margin: 2rem auto 0;
+  color: #475569;
+  text-align: center;
+}
+.price-change-note {
+  margin-top: 0.75rem;
+  color: #b91c1c;
+  font-weight: 800;
+}
+/* Aligns main and secondary page actions beneath content. */
+.page-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+/* Secondary text link displayed beside the primary booking button. */
+.text-link {
+  color: #9a3412;
+  font-weight: 800;
+  text-decoration-color: #f97316;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+.text-link:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
+}
+
+/* PAINTBALL PACKAGES
+   Pricing and reservation information supplied for the Paintball page. */
+.paintball-packages .section-label,
+.party-package-section .section-label {
+  color: #c2410c;
+}
+.package-grid {
+  max-width: 46rem;
+}
+.package-card {
+  border-top: 5px solid #f97316;
+}
+.card-kicker {
+  margin: 0 0 0.5rem !important;
+  color: #c2410c !important;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.package-card h3 {
+  color: #c2410c;
+  font-size: 2.1rem;
+}
+.package-card h3 span,
+.party-package-price span {
+  font-size: 1rem;
+}
+.rental-includes ul,
+.party-package-details ul {
+  margin: 0.85rem 0 0;
+  padding-left: 1.25rem;
+  color: #475569;
+  line-height: 1.7;
+}
+.field-paint-note,
+.pricing-note {
+  max-width: 52rem;
+  margin: 1.5rem auto 0;
+  color: #9a3412;
+  font-weight: 800;
+  text-align: center;
+}
+.party-package-section {
+  padding: 5rem 10%;
+  background: #172033;
+  color: #f8fafc;
+}
+.party-package-section .content-heading h2 {
+  color: #fff;
+}
+.party-package-section .content-heading p:last-child {
+  color: #cbd5e1;
+}
+.party-package-card {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.75fr) minmax(0, 1.25fr);
+  max-width: 56rem;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  color: #172033;
+}
+.party-package-price {
+  display: grid;
+  align-content: center;
+  padding: 2rem;
+  background: #f97316;
+  color: #fff;
+}
+.party-package-price p {
+  margin: 0 0 0.75rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.party-package-price strong {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
+}
+.party-package-details {
+  padding: 2rem;
+}
+.party-package-details h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.party-package-details p {
+  margin: 0.65rem 0 1.5rem;
+  color: #475569;
+  line-height: 1.6;
+}
+.pricing-note {
+  color: #fed7aa;
+}
+
+/* AIRSOFT VISIT AND SAFETY INFORMATION */
+.airsoft-rental-card {
+  border-top: 5px solid #f97316;
+}
+.airsoft-rental-notice {
+  border-left-color: #dc2626;
+  background: #fff7ed;
+}
+.airsoft-rules-section {
+  padding: 5rem 10%;
+  background: #172033;
+  color: #f8fafc;
+}
+.airsoft-rules-section .section-label {
+  color: #fb923c;
+}
+.airsoft-rules-section .content-heading h2 {
+  color: #fff;
+}
+.airsoft-rules-section .content-heading p:last-child {
+  color: #cbd5e1;
+}
+.airsoft-rules-grid {
+  max-width: 56rem;
+}
+.airsoft-rule-card {
+  border: 0;
+  box-shadow: none;
+}
+.airsoft-rule-card h3 {
+  color: #c2410c;
+}
+.airsoft-limits {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+}
+.airsoft-limits div {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.airsoft-limits div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.airsoft-limits dt {
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.airsoft-limits dd {
+  margin: 0.25rem 0 0;
+  color: #172033;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+.airsoft-rule-card ul {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  color: #475569;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .rules-waiver-content {
+    padding-top: 8rem;
+  }
+
+  .prices-content {
+    padding-top: 8rem;
+  }
+
+  .pricing-primary,
+  .pricing-extras {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .pricing-primary section + section {
+    border-top: 1px solid #e2e8f0;
+    border-left: 0;
+    padding-top: 2rem;
+    padding-left: 0;
+  }
+
+  .party-price-strip {
+    padding: 1.5rem;
+  }
+
+  .admission-rental-items .compact-price-list {
+    grid-template-columns: 1fr;
+  }
+
+  .admission-rental-items .compact-price-list div:last-child {
+    grid-column: auto;
+  }
+
+  .party-package-section {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .airsoft-rules-section {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .party-package-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Stacks inner-page cards and reduces horizontal spacing on phones. */
+@media (max-width: 600px) {
+  .inner-page-hero {
+    min-height: 14rem;
+    padding: 8rem 1.25rem 2.5rem;
+  }
+
+  .page-content {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduces the FAQ section's side padding on narrow screens. */
+@media (max-width: 600px) {
+  .faq-section {
+    padding: 3.5rem 1.25rem;
+  }
+}
+
+/* Stacks the reservation request fields while preserving clearance below the header. */
+@media (max-width: 600px) {
+  .reservation-content {
+    padding-top: 8rem;
+  }
+
+  .reservation-form {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-details-form,
+  .reservation-form-action {
+    grid-column: auto;
+  }
+
+  .calendar-heading-row {
+    align-items: flex-start;
+  }
+
+  .contact-name-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FIXED SCROLL INDICATOR
+   This sits on the right edge and is updated by script.js. */
 .page-scroll {
   position: fixed;
   top: 15vh;
@@ -147,6 +1393,7 @@ header {
   background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
 }
+/* The movable white part inside the scroll track. */
 .page-scroll-thumb {
   width: 100%;
   height: 20%;

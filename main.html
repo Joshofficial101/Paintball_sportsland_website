@@ -1,76 +1,202 @@
+<!-- The main page for Paintball Sports Land. Page styles and behaviour are loaded below. -->
 <html>
   <head>
+    <!-- Text shown in the browser tab and in search results. -->
     <title>Paintball Sports Land</title>
-    <!-- LINKS YOUR HTML TO YOUR STYLE.CSS FILE -->
-  <link rel="stylesheet" href="style.css">
+    <!-- Loads the CSS file that controls the page design and layout. -->
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <!-- Header stays on top of the hero images because CSS gives it a high stacking order. -->
     <header>
+      <!-- The business name displayed at the top of the page. -->
       <h1>Paintball Sports Land</h1>
       <nav>
+        <!-- Main site navigation. Update each href when its matching page is created. -->
         <ul class="nav-menu">
-            <li><a href="Home.html">Home</a></li>
+            <!-- main.html is the homepage file in this project. -->
+            <li><a href="main.html">Home</a></li>
             <li><a href="Paintball.html">Paintball</a></li>
             <li><a href="Airsoft.html">Airsoft</a></li>
             <li><a href="prices.html">Prices</a></li>
-            <li><a href="Rules.html">Rules</a></li>
-            <li><a href="Waiver.html">Waiver</a></li>
+            <li><a href="Rules.html">Rules &amp; Waiver</a></li>
             <li><a href="Reservation.html">Reservation</a></li>
         </ul>
       </nav>
     </header>
 
-    <!-- Slideshow images -->
+    <!--
+      Hero slideshow: each .slide contains one background image and one caption.
+      The first slide needs the active class so it is visible when the page loads.
+      Add a new slide here and a matching dot button below if you add another image.
+    -->
     <section class="slideshow">
-  <div class="slide active">
-    <img src="images\airfoster.jpg" alt="Paintball field">
-    <div class="caption">
-      <p>Take on the field</p>
-      <a class="book-button" href="Reservation.html">Book Your Game</a>
+      <!-- Slide 1: active makes this the opening image. -->
+      <div class="slide active">
+        <!-- alt text describes the image for screen readers. -->
+        <img src="images\overivew_town_minifield.jpg" alt="Paintball players">
+        <!-- Caption contains the headline and main booking call-to-action. -->
+        <div class="caption">
+          <p>Play with your team</p>
+          <!-- Change Reservation.html if the reservation page is renamed. -->
+          <a class="book-button" href="Reservation.html">Book Your Game</a>
+        </div>
+      </div>
+
+      <!-- Slide 2. It becomes visible when a user chooses it with the controls. -->
+      <div class="slide airsoft-slide">
+        <img src="images\airfoster.jpg" alt="Airsoft player aiming a marker">
+        <div class="caption">
+          <p>Take on the field</p>
+          <a class="book-button" href="Reservation.html">Book Your Game</a>
+        </div>
+      </div>
+
+      <!-- Slide 3. -->
+      <div class="slide">
+        <img src="images\overview_of_speedball.jpg" alt="Paintball equipment">
+        <div class="caption">
+          <p>Gear up and play</p>
+          <a class="book-button" href="Reservation.html">Book Your Game</a>
+        </div>
+      </div>
+
+      <!-- Slide 4. -->
+      <div class="slide">
+        <img src="images\paintballer_running.jpg" alt="Paintball field overview">
+        <div class="caption">
+          <p>Explore our fields</p>
+          <a class="book-button" href="Reservation.html">Book Your Game</a>
+        </div>
+      </div>
+
+      <!-- Manual slideshow controls. aria-label text is used by screen readers. -->
+      <div class="slide-controls" aria-label="Slideshow controls">
+        <!-- Buttons use type="button" so they never submit a form. -->
+        <button class="slide-arrow previous" type="button" aria-label="Previous slide">&lt;</button>
+        <!-- One dot per slide; keep their order aligned with the slides above. -->
+        <div class="slide-dots">
+          <button class="slide-dot active" type="button" aria-label="Show slide 1"></button>
+          <button class="slide-dot" type="button" aria-label="Show slide 2"></button>
+          <button class="slide-dot" type="button" aria-label="Show slide 3"></button>
+          <button class="slide-dot" type="button" aria-label="Show slide 4"></button>
+        </div>
+        <button class="slide-arrow next" type="button" aria-label="Next slide">&gt;</button>
+      </div>
+    </section>
+
+    <!--
+      HOURS AND AVAILABILITY
+      This section sits directly below the hero so visitors can quickly decide
+      when they can play. Update the text here whenever business hours change.
+    -->
+    <section class="hours-section" aria-labelledby="hours-heading">
+      <!-- Introductory copy explains what the schedule cards mean. -->
+      <div class="hours-intro">
+        <p class="section-label">Plan your visit</p>
+        <h2 id="hours-heading">Hours &amp; Availability</h2>
+        <p>Ready for a day on the field? Choose walk-on play or a private party on the weekend. Not available on weekends, we will open exclusively for private parties during the week.</p>
+      </div>
+
+      <!-- Two schedule cards separate walk-on availability from private-party availability. -->
+      <div class="hours-cards">
+        <!-- Weekend card: walk-on players and private parties are welcome. -->
+        <article class="hours-card">
+          <p class="hours-card-label">Weekend play</p>
+          <h3>Saturday &amp; Sunday</h3>
+          <p class="hours-time">10:00 AM – 4:00 PM</p>
+          <p>Walk-on play and private parties.</p>
+        </article>
+
+        <!-- Weekday card: the facility is reserved exclusively for private groups. -->
+        <article class="hours-card hours-card--accent">
+          <p class="hours-card-label">Private groups</p>
+          <h3>Monday – Friday</h3>
+          <p class="hours-time">By reservation</p>
+          <p>Open exclusively for private parties.</p>
+        </article>
+      </div>
+
+      <!-- Repeats the reservation action after visitors have read the schedule. -->
+      <a class="book-button hours-button" href="Reservation.html">Book a Private Party</a>
+    </section>
+
+    <!--
+      LOCATION AND CONTACT
+      This section gives visitors the two fastest ways to reach the business:
+      finding the field and calling the staff. Update the address and phone link
+      together if either detail ever changes.
+    -->
+    <section class="location-section" aria-labelledby="location-heading">
+      <!-- Left column introduces the section and contains the directions action. -->
+      <div class="location-intro">
+        <p class="section-label">Find the field</p>
+        <h2 id="location-heading">Location &amp; Contact</h2>
+        <p>Questions before game day? Get in touch or use the map for directions to Paintball Sports Land.</p>
+        <!-- Opens Google Maps with the business address already entered. -->
+        <a class="directions-button" href="https://www.google.com/maps/search/?api=1&amp;query=10418+Old+Liberty+Rd+Frederick+MD+21702" target="_blank" rel="noopener noreferrer">Get Directions</a>
+      </div>
+
+      <!-- Right column contains the address and phone information. -->
+      <div class="contact-details">
+        <!-- address is the semantic HTML element for a physical business address. -->
+        <address class="contact-item">
+          <span class="contact-label">Address</span>
+          <span>10418 Old Liberty Rd</span>
+          <span>Frederick, MD 21702</span>
+        </address>
+
+        <!-- tel: lets visitors on phones tap the number to start a call. -->
+        <div class="contact-item">
+          <span class="contact-label">Phone</span>
+          <a href="tel:+13018981100">(301) 898-1100</a>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      FREQUENTLY ASKED QUESTIONS
+      The built-in details/summary elements create an accessible accordion without
+      JavaScript. Add a new details block below to add another question and answer.
+    -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <!-- Brief introduction to the question list. -->
+      <div class="faq-intro">
+        <p class="section-label">Need to know</p>
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+        <p>Quick answers to help you plan your visit to Paintball Sports Land.</p>
+      </div>
+
+      <!-- Each details element can be clicked to expand or collapse its answer. -->
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Will paint wash out?</summary>
+          <p>Yes paint washes out of clothing, but we recommend washing your clothes as soon as possible.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What should I wear?</summary>
+          <p>It's recommended to wear older clothes and long pants.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can a group of 10 or more players join walk-on paintball?</summary>
+          <p>Yes. Groups of 10 or more can join walk-on paintball. We recommend calling ahead to help guarantee rentals for your group.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you offer Airsoft rentals?</summary>
+          <p>Yes, but rental quantities are limited. Reserve ahead of time to help guarantee an Airsoft gun.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Fixed scroll indicator. JavaScript moves its inner thumb as the visitor scrolls. -->
+    <div class="page-scroll" aria-label="Page scroll progress">
+      <div class="page-scroll-thumb"></div>
     </div>
-  </div>
 
-  <div class="slide">
-    <img src="images\overivew_town_minifield.jpg" alt="Paintball players">
-    <div class="caption">
-      <p>Play with your team</p>
-      <a class="book-button" href="Reservation.html">Book Your Game</a>
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="images\overview_of_speedball.jpg" alt="Paintball equipment">
-    <div class="caption">
-      <p>Gear up and play</p>
-      <a class="book-button" href="Reservation.html">Book Your Game</a>
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="images\paintballer_running.jpg" alt="Paintball field overview">
-    <div class="caption">
-      <p>Explore our fields</p>
-      <a class="book-button" href="Reservation.html">Book Your Game</a>
-    </div>
-  </div>
-
-
-  <div class="slide-controls" aria-label="Slideshow controls">
-    <button class="slide-arrow previous" type="button" aria-label="Previous slide">&lt;</button>
-    <div class="slide-dots">
-      <button class="slide-dot active" type="button" aria-label="Show slide 1"></button>
-      <button class="slide-dot" type="button" aria-label="Show slide 2"></button>
-      <button class="slide-dot" type="button" aria-label="Show slide 3"></button>
-      <button class="slide-dot" type="button" aria-label="Show slide 4"></button>
-    </div>
-    <button class="slide-arrow next" type="button" aria-label="Next slide">&gt;</button>
-  </div>
-</section>
-
-<div class="page-scroll" aria-label="Page scroll progress">
-  <div class="page-scroll-thumb"></div>
-</div>
-
-<!-- JavaScript for slideshow functionality -->
-<script src="script.js"></script>
-    
+    <!-- Loads the slideshow controls and scroll-indicator behaviour after page content. -->
+    <script src="script.js"></script>
+  </body>
+</html>
