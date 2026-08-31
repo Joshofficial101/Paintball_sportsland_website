@@ -8,10 +8,6 @@ const previousButton = document.querySelector('.previous');
 const nextButton = document.querySelector('.next');
 const dots = document.querySelectorAll('.slide-dot');
 
-/* Elements that make up the fixed scroll-progress indicator. */
-const scrollTrack = document.querySelector('.page-scroll');
-const scrollThumb = document.querySelector('.page-scroll-thumb');
-
 /* Stores the zero-based position of the visible slide: 0 means the first slide. */
 let currentSlide = 0;
 
@@ -49,33 +45,3 @@ dots.forEach((dot, dotNumber) => {
     showSlide(dotNumber);
   });
 });
-
-/*
-  Calculates how far down the page the visitor has scrolled and moves the thumb
-  the same percentage down its track. A page with no scrollable height stays at 0.
-*/
-function updateScrollThumb() {
-  const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercent = pageHeight > 0 ? window.scrollY / pageHeight : 0;
-  scrollThumb.style.transform = `translateY(${scrollPercent * 100}%)`;
-}
-
-/* Recalculate the indicator continuously as the visitor scrolls. */
-window.addEventListener('scroll', updateScrollThumb);
-
-/*
-  Allows visitors to click a point on the scroll track to smoothly jump to the
-  matching percentage of the page.
-*/
-scrollTrack.addEventListener('click', (event) => {
-  const trackPosition = event.clientY - scrollTrack.getBoundingClientRect().top;
-  const trackHeight = scrollTrack.clientHeight;
-  const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-  window.scrollTo({
-    top: (trackPosition / trackHeight) * pageHeight,
-    behavior: 'smooth' /* Animate the jump rather than moving instantly. */
-  });
-});
-
-/* Set the correct indicator position immediately when the page first loads. */
-updateScrollThumb();
