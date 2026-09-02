@@ -4,7 +4,7 @@
   automatically changes the PDF players download - no second rules file to update.
 */
 const rulesDownloadButton = document.querySelector('#download-rules-button');
-const fieldRulesList = document.querySelector('.field-rules-section ol');
+const fieldRules = document.querySelectorAll('[data-download-rule]');
 
 /* PDF literal strings need escaped punctuation and simple ASCII-safe text. */
 function escapePdfText(value) {
@@ -77,10 +77,10 @@ function createRulesPdf(rules) {
   return pdf;
 }
 
-if (rulesDownloadButton && fieldRulesList) {
+if (rulesDownloadButton && fieldRules.length) {
   rulesDownloadButton.addEventListener('click', () => {
-    /* Pulls the current text from every list item instead of maintaining a duplicate rules list. */
-    const rules = Array.from(fieldRulesList.querySelectorAll('li'), (item) => item.textContent.trim());
+    /* Pulls the current marked rules from this page instead of maintaining a duplicate list. */
+    const rules = Array.from(fieldRules, (item) => item.textContent.trim());
     const rulesPdf = createRulesPdf(rules);
     const downloadUrl = URL.createObjectURL(new Blob([rulesPdf], { type: 'application/pdf' }));
     const downloadLink = document.createElement('a');

@@ -29,7 +29,7 @@
       <section class="page-content reservation-content" aria-labelledby="reservation-heading">
         <div class="content-heading">
           <h2 id="reservation-heading">Request a Reservation</h2>
-          <p>Choose your preferred date and reservation details. A reservation is not confirmed until Paintball Sports Land approves it.</p>
+          <p>This form sends a reservation request, not a confirmed booking. Choose your preferred date and details; Paintball Sports Land will contact you after reviewing your request.</p>
         </div>
         <form class="reservation-form" id="reservation-request-form">
           <section class="calendar-panel" aria-labelledby="date-heading">
@@ -55,15 +55,26 @@
             <label for="reservation-package">Reservation type</label>
             <select id="reservation-package" name="package" required>
               <option value="">Select a reservation type</option>
-              <option>Paintball Party Package</option>
-              <option>Airsoft Rental Request</option>
+              <option value="paintball-party">Paintball Party Package</option>
+              <!-- JavaScript enables this option after a Saturday or Sunday is selected. -->
+              <option id="airsoft-rental-option" value="airsoft-rental" disabled>Airsoft Rental Request</option>
             </select>
+            <p class="reservation-input-help" id="reservation-package-help">Select a weekend date to request an Airsoft rental.</p>
 
-            <fieldset class="session-options" id="session-options" disabled>
+            <fieldset class="session-options" id="session-options" disabled hidden>
               <legend>Weekend Session</legend>
               <p id="session-help">Select a weekend date to choose a session.</p>
               <label><input name="session" type="radio" value="Morning session: 10:00 AM–1:00 PM"> Morning session: 10:00 AM–1:00 PM</label>
               <label><input name="session" type="radio" value="Afternoon session: 1:00 PM–4:00 PM"> Afternoon session: 1:00 PM–4:00 PM</label>
+            </fieldset>
+
+            <!-- This field is enabled only for weekday private-group requests. -->
+            <fieldset class="session-options weekday-time-options" id="weekday-time-options" disabled hidden>
+              <legend>Weekday Preferred Start Time</legend>
+              <p>Weekday private groups play for three hours. The owner will confirm your final start time.</p>
+              <label for="weekday-start-time">Preferred start time
+                <input id="weekday-start-time" name="weekdayStartTime" type="text" placeholder="Example: 10:30 AM" autocomplete="off" disabled>
+              </label>
             </fieldset>
 
             <label for="player-count">Expected players</label>
@@ -77,19 +88,25 @@
               <div><label for="last-name">Last name</label><input id="last-name" name="lastName" autocomplete="family-name" required></div>
             </div>
             <label for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+            <input id="email" name="email" type="email" autocomplete="email" pattern="[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+" title="Enter an email address with an @ symbol and a dot, such as name@example.com." required>
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="14" pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number." required>
           </section>
 
           <div class="reservation-form-action">
             <button class="book-button" type="submit">Send Reservation Request</button>
-            <p id="reservation-status" role="status" aria-live="polite"></p>
+            <p class="visually-hidden" id="reservation-status" role="status" aria-live="polite"></p>
           </div>
         </form>
         <p class="reservation-call-note">Online reservation requests will be sent to the owner for approval once the reservation service is connected. For immediate help, call <a href="tel:+13018981100">(301) 898-1100</a>.</p>
       </section>
     </main>
+    <!-- Displays form feedback in a prominent pop-up instead of below the button. -->
+    <dialog class="reservation-status-dialog" id="reservation-status-dialog" aria-labelledby="reservation-dialog-title">
+      <h2 id="reservation-dialog-title">Reservation Request</h2>
+      <p id="reservation-dialog-message"></p>
+      <button class="book-button" id="reservation-dialog-close" type="button">Close</button>
+    </dialog>
     <!-- Creates the live calendar and validates the static reservation-request demo. -->
     <script src="reservation-calendar.js"></script>
   </body>

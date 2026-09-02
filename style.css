@@ -161,14 +161,20 @@ header {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
+/* Makes the booking action inside the homepage photo slides easier to tap. */
+.caption .book-button {
+  padding: 1rem 1.6rem;
+  font-size: 1.1rem;
+}
 /* SLIDESHOW CONTROLS */
 .slide-arrow {
   position: relative;
   border: none;
   background: transparent;
   color: white;
-  font-size: 1.8rem;
-  padding: 0 0.75rem;
+  font-size: 2.5rem;
+  line-height: 1;
+  padding: 0.25rem 1rem;
   cursor: pointer;
 }
 /* Holds the arrows and dots at the bottom center of the hero. */
@@ -179,18 +185,18 @@ header {
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   transform: translateX(-50%);
 }
 /* Places the slide selector dots in a row. */
 .slide-dots {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.7rem;
 }
 /* Default (unselected) slide selector. */
 .slide-dot {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 1rem;
+  height: 1rem;
   padding: 0;
   border: 1px solid white;
   border-radius: 50%;
@@ -293,6 +299,8 @@ header {
 /* Adds a little visual separation above the booking link. */
 .hours-button {
   margin-top: 0.5rem;
+  padding: 1.25rem 2.25rem;
+  font-size: 1.3rem;
 }
 
 /*
@@ -405,6 +413,24 @@ header {
   /* The underline collided with parentheses on some screens; color and weight keep this clearly tappable. */
   text-decoration: none;
 }
+/* Keeps the two-line address readable while making the entire address tappable. */
+.contact-item .address-map-link {
+  display: grid;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+}
+.contact-item .address-map-link:hover {
+  color: #9a3412;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.contact-item .address-map-link:focus-visible {
+  outline: 3px solid #172033;
+  outline-offset: 3px;
+}
 /* Keeps displayed phone numbers on one unbroken, comfortably spaced line. */
 a[href^="tel:"] {
   display: inline-block;
@@ -504,7 +530,9 @@ a[href^="tel:"] {
 */
 .inner-page-hero {
   display: grid;
+  align-content: center;
   place-items: center;
+  row-gap: 0.4rem;
   min-height: 18rem;
   padding: 4rem 5%;
   background: linear-gradient(135deg, #111827, #263449);
@@ -524,7 +552,7 @@ a[href^="tel:"] {
 /* Short description placed below each inner-page title. */
 .inner-page-hero > p:last-child {
   max-width: 42rem;
-  margin: 1rem 0 0;
+  margin: 0.4rem 0 0;
   color: #dbeafe;
   font-size: 1.1rem;
   line-height: 1.6;
@@ -620,13 +648,25 @@ a[href^="tel:"] {
 .waiver-download-section .book-button {
   margin-top: 1.25rem;
 }
-.field-rules-section ol {
+.field-rules-list,
+.rental-rules-list {
   display: grid;
   gap: 0.7rem;
   margin: 1rem 0 0;
   padding-left: 1.4rem;
   color: #475569;
   line-height: 1.6;
+}
+.field-rules-list h4 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.05rem;
+}
+.field-rules-list p {
+  margin: 0.35rem 0 0;
+}
+.rental-rules-heading {
+  margin-top: 2rem !important;
 }
 .field-rules-section li::marker {
   color: #c2410c;
@@ -788,6 +828,15 @@ a[href^="tel:"] {
   outline: 3px solid rgba(249, 115, 22, 0.35);
   border-color: #ea580c;
 }
+/* Immediate visual feedback helps visitors confirm a complete email address. */
+.contact-details-form input.is-invalid {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+.contact-details-form input.is-valid {
+  border-color: #16a34a;
+  background: #f0fdf4;
+}
 .session-options {
   display: grid;
   gap: 0.65rem;
@@ -811,6 +860,13 @@ a[href^="tel:"] {
   font-size: 0.9rem;
   line-height: 1.4;
 }
+/* Explains when a reservation type is unavailable without adding another card. */
+.reservation-input-help {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
 .session-options label {
   display: flex;
   align-items: flex-start;
@@ -823,6 +879,31 @@ a[href^="tel:"] {
 .session-options input {
   width: auto;
   margin: 0.2rem 0 0;
+}
+/* Restores a full-width time field inside the weekday session fieldset. */
+.weekday-time-options label {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.weekday-time-options input {
+  width: 100%;
+  margin: 0;
+}
+/* Makes the weekend session choices feel like large tap targets instead of tiny radios. */
+.session-options:not(.weekday-time-options) label {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  background: #fff;
+  font-size: 1rem;
+}
+.session-options:not(.weekday-time-options) label:has(input:checked) {
+  border-color: #ea580c;
+  background: #fff7ed;
 }
 .contact-details-form {
   grid-column: 1 / -1;
@@ -855,6 +936,46 @@ a[href^="tel:"] {
   margin: 0;
   color: #475569;
   line-height: 1.5;
+}
+/* Keeps live status text available to screen readers while the dialog handles visible feedback. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Large, focused reservation feedback that is easy to notice after submission. */
+.reservation-status-dialog {
+  width: min(90vw, 34rem);
+  margin: auto;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+  color: #172033;
+}
+.reservation-status-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.68);
+}
+.reservation-status-dialog h2 {
+  margin: 0;
+  color: #c2410c;
+  font-size: 1.5rem;
+}
+.reservation-status-dialog p {
+  margin: 1rem 0 1.5rem;
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.reservation-status-dialog .book-button {
+  border: 0;
+  cursor: pointer;
 }
 .reservation-call-note {
   max-width: 60rem;
@@ -1130,6 +1251,10 @@ a[href^="tel:"] {
 .package-grid {
   max-width: 46rem;
 }
+/* Brings the Paintball rental heading closer to the hero photograph. */
+.paintball-packages {
+  padding-top: 3rem;
+}
 .package-card {
   border-top: 5px solid #f97316;
 }
@@ -1175,6 +1300,11 @@ a[href^="tel:"] {
 .party-package-section .content-heading p:last-child {
   color: #cbd5e1;
 }
+/* Spaces the weekend and weekday private-group packages without extra cards. */
+.party-package-list {
+  display: grid;
+  gap: 1.5rem;
+}
 .party-package-card {
   display: grid;
   grid-template-columns: minmax(13rem, 0.75fr) minmax(0, 1.25fr);
@@ -1197,6 +1327,12 @@ a[href^="tel:"] {
   margin: 0 0 0.75rem;
   font-weight: 800;
   line-height: 1.4;
+}
+/* Makes the weekday and weekend package names easy to spot before the price. */
+.party-package-label {
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .party-package-price strong {
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -1221,9 +1357,6 @@ a[href^="tel:"] {
 /* AIRSOFT VISIT AND SAFETY INFORMATION */
 .airsoft-rental-card {
   border-top: 5px solid #f97316;
-}
-.airsoft-rental-notice {
-  border-left-color: #dc2626;
   background: #fff7ed;
 }
 .airsoft-rules-section {
@@ -1341,6 +1474,10 @@ a[href^="tel:"] {
 
   .page-content {
     padding: 3.5rem 1.25rem;
+  }
+
+  .paintball-packages {
+    padding-top: 2.5rem;
   }
 
   .content-grid {

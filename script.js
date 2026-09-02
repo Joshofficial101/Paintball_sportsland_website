@@ -7,6 +7,7 @@ const slides = document.querySelectorAll('.slide');
 const previousButton = document.querySelector('.previous');
 const nextButton = document.querySelector('.next');
 const dots = document.querySelectorAll('.slide-dot');
+const mapAddressLinks = document.querySelectorAll('[data-map-address]');
 
 /* Stores the zero-based position of the visible slide: 0 means the first slide. */
 let currentSlide = 0;
@@ -44,4 +45,24 @@ dots.forEach((dot, dotNumber) => {
   dot.addEventListener('click', () => {
     showSlide(dotNumber);
   });
+});
+
+/*
+  Uses Apple Maps on iPhones and iPads, the device's installed map app on
+  Android, and leaves the Google Maps web link as the desktop fallback.
+*/
+const isAppleMobile = /iPad|iPhone|iPod/.test(navigator.userAgent)
+  || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isAndroid = /Android/i.test(navigator.userAgent);
+
+mapAddressLinks.forEach((link) => {
+  const address = encodeURIComponent(link.dataset.mapAddress);
+
+  if (isAppleMobile) {
+    link.href = `https://maps.apple.com/?q=${address}`;
+    link.removeAttribute('target');
+  } else if (isAndroid) {
+    link.href = `geo:0,0?q=${address}`;
+    link.removeAttribute('target');
+  }
 });

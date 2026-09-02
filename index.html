@@ -101,20 +101,20 @@
 
       <!-- Two schedule cards separate walk-on availability from private-party availability. -->
       <div class="hours-cards">
-        <!-- Weekend card: walk-on players and private parties are welcome. -->
+        <!-- Weekend card: walk-on play hours. -->
         <article class="hours-card">
-          <p class="hours-card-label">Weekend play</p>
+          <p class="hours-card-label">Walk-On Weekend Play</p>
           <h3>Saturday &amp; Sunday</h3>
           <p class="hours-time">10:00 AM – 4:00 PM</p>
-          <p>Walk-on play and private parties.</p>
+          <p>Walk-on play.</p>
         </article>
 
         <!-- Weekday card: the facility is reserved exclusively for private groups. -->
         <article class="hours-card hours-card--accent">
           <p class="hours-card-label">Private groups</p>
-          <h3>Monday - Friday</h3>
+          <h3>Monday - Sunday</h3>
           <p class="hours-time">By reservation</p>
-          <p>Open exclusively for private parties.</p>
+          <p>Open exclusively for private parties on the weekend.</p>
         </article>
       </div>
 
@@ -140,11 +140,13 @@
 
       <!-- Right column contains the address and phone information. -->
       <div class="contact-details">
-        <!-- address is the semantic HTML element for a physical business address. -->
+        <!-- The address link selects the appropriate mapping app for the visitor's device. -->
         <address class="contact-item">
           <span class="contact-label">Address</span>
-          <span>10418 Old Liberty Rd</span>
-          <span>Frederick, MD 21702</span>
+          <a class="address-map-link" data-map-address="10418 Old Liberty Rd, Frederick, MD 21702" href="https://www.google.com/maps/search/?api=1&amp;query=10418+Old+Liberty+Rd+Frederick+MD+21702" target="_blank" rel="noopener noreferrer">
+            <span>10418 Old Liberty Rd</span>
+            <span>Frederick, MD 21702</span>
+          </a>
         </address>
 
         <!-- tel: lets visitors on phones tap the number to start a call. -->
