@@ -18,9 +18,10 @@ body {
 
 /* BUSINESS NAME IN THE HEADER */
 h1 {
-  /* Centers the name and removes the browser's default top spacing. */
+  /* Centers the name and gives the shared site banner a clear visual presence. */
   text-align: center;
-  margin-top: 0;
+  margin: 0 0 1rem;
+  font-size: clamp(2.3rem, 4vw, 3.25rem);
   /* White text and a shadow keep the title readable over every photograph. */
   color: #fff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
@@ -32,7 +33,7 @@ header {
   position: relative;
   width: 100%;
   z-index: 3;
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   /* An opaque background keeps the banner readable without cutting into images. */
   background: #111827;
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
@@ -46,7 +47,7 @@ header {
 .nav-menu {
   display: flex;            /* Lines navigation items up in a row. */
   justify-content: center;  /* Centers the complete menu. */
-  gap: 20px;                /* Space between each link; increase for a looser menu. */
+  gap: 1.5rem;              /* Space between each link; increase for a looser menu. */
   list-style: none;         /* Removes default bullet points. */
   padding: 0;               /* Removes browser-provided list indentation. */
   margin: 0;                /* Removes browser-provided list spacing. */
@@ -56,6 +57,7 @@ header {
 .nav-menu a {
   text-decoration: none;
   color: #fff;
+  font-size: 1.2rem;
   font-weight: 700;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
@@ -574,6 +576,29 @@ a[href^="tel:"] {
   padding: 5rem 10%;
   background: #f8fafc;
   color: #172033;
+}
+/* Caption-free masonry layout keeps each field photo at its natural shape. */
+.gallery-grid {
+  columns: 3 18rem;
+  column-gap: 1.25rem;
+  max-width: 76rem;
+  margin: 0 auto;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  background: #e2e8f0;
+}
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.025);
 }
 /* Centers the title and introduction above each page's content cards. */
 .content-heading {
@@ -1483,6 +1508,10 @@ a[href^="tel:"] {
   .content-grid {
     grid-template-columns: 1fr;
   }
+
+  .gallery-grid {
+    columns: 1;
+  }
 }
 
 /* Reduces the FAQ section's side padding on narrow screens. */
@@ -1524,21 +1553,24 @@ a[href^="tel:"] {
 */
 @media (max-width: 700px) {
   header {
-    padding: 0.75rem 1rem;
+    padding: 1.5rem 1.1rem;
   }
 
   h1 {
-    margin-bottom: 0.65rem;
-    font-size: clamp(1.35rem, 7vw, 2rem);
+    margin-bottom: 1.15rem;
+    font-size: clamp(2.3rem, 11vw, 3.25rem);
   }
 
   .nav-menu {
     flex-wrap: wrap;
-    gap: 0.55rem 1rem;
+    gap: 1rem 1.4rem;
   }
 
   .nav-menu a {
-    font-size: 0.85rem;
+    display: inline-block;
+    padding: 0.3rem;
+    font-size: 1.3rem;
+    line-height: 1.45;
   }
 
   .slideshow {
