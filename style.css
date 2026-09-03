@@ -105,6 +105,12 @@ header {
   height:100%; 
   object-fit:cover;
 }
+/* picture becomes the image wrapper on the homepage once WebP is available. */
+.slide picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 /* Keeps the Airsoft player's head and marker below the header without changing hero height. */
 .airsoft-slide img {
   object-position: center 18%;
@@ -564,12 +570,24 @@ a[href^="tel:"] {
   background:
     linear-gradient(rgba(14, 25, 18, 0.68), rgba(14, 25, 18, 0.68)),
     url("images/Airsoft_2.jpg") center 55% / cover no-repeat;
+  background:
+    linear-gradient(rgba(14, 25, 18, 0.68), rgba(14, 25, 18, 0.68)),
+    image-set(
+      url("images/optimized/Airsoft_2.webp") type("image/webp"),
+      url("images/Airsoft_2.jpg") type("image/jpeg")
+    ) center 55% / cover no-repeat;
 }
 /* Paintball page hero uses the supplied field photograph with a dark overlay for readable text. */
 .paintball-hero {
   background:
     linear-gradient(rgba(10, 20, 12, 0.7), rgba(10, 20, 12, 0.7)),
     url("images/mfranck-paintball-1449870.jpg") center 42% / cover no-repeat;
+  background:
+    linear-gradient(rgba(10, 20, 12, 0.7), rgba(10, 20, 12, 0.7)),
+    image-set(
+      url("images/optimized/mfranck-paintball-1449870.webp") type("image/webp"),
+      url("images/mfranck-paintball-1449870.jpg") type("image/jpeg")
+    ) center 42% / cover no-repeat;
 }
 /* Main white content area used on all of the new pages. */
 .page-content {
